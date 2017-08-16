@@ -56,7 +56,7 @@ class Repository(object):
             raise RepositoryNotFound(source)
 
     def __iter__(self):
-        return RevisionIterator(self)
+        return RevisionIterator(self.get_current_revision())
 
     def _read_manifest(self):
         try:
