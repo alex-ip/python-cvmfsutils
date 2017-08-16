@@ -46,7 +46,7 @@ class CatalogIterator:
 
 
     def _pop(self):
-        return self.backlog.popleft()
+        return self.backlog.pop()
 
 
     def _recursion_step(self):
@@ -244,7 +244,8 @@ class Catalog(DatabaseObject):
                             WHERE parent_1 = " + str(parent_1) + " AND         \
                                   parent_2 = " + str(parent_2) + "             \
                             ORDER BY name ASC;")
-        return [ self._make_directory_entry(result) for result in res ]
+        for result in res:
+            yield self._make_directory_entry(result)
 
 
     def find_directory_entry(self, path):
