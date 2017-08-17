@@ -18,14 +18,16 @@ class RevisionIterator(object):
             self.catalog          = catalog
             self.catalog_iterator = catalog.__iter__()
 
-    def __init__(self, revision, catalog_hash=None):
+    def __init__(self, revision, catalog_hash=None, catalog_filter=None, finish_catalog_callback=None):
         self.revision    = revision
         self.catalog_stack = collections.deque()
+        self.catalog_filter = catalog_filter
+        self.finish_catalog_callback = finish_catalog_callback
         if catalog_hash is None:
             catalog = revision.retrieve_root_catalog()
         else:
             catalog = revision.retrieve_catalog(catalog_hash)
-        self._push_catalog(catalog)
+        self._push_catalog(catalog, nofilter=True)
 
     def __iter__(self):
         return self
@@ -57,7 +59,9 @@ class RevisionIterator(object):
     def _has_more(self):
         return len(self.catalog_stack) > 0
 
-    def _push_catalog(self, catalog):
+    def _push_catalog(self, catalog, nofilter=False):
+        if not nofilter and self.catalog_filter and not self.catalog_filter(catalog):
+            return
         catalog_iterator = self._CatalogIterator(catalog)
         self.catalog_stack.append(catalog_iterator)
 
@@ -65,6 +69,8 @@ class RevisionIterator(object):
         return self.catalog_stack[-1]
 
     def _pop_catalog(self):
+        if self.finish_catalog_callback:
+            self.finish_catalog_callback(self._get_current_catalog().catalog)
         return self.catalog_stack.pop()
 
 
