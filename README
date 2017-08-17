@@ -1,3 +1,5 @@
+**Please Note**: This repository is unmaintained and unsupported for the time being.
+
 The CernVM-FS python package allows for the inspection of CernVM-FS repositories
 using python. In particular to browse their file catalog hierarchy, inspect
 CernVM-FS repository manifests (a.k.a. .cvmfspublished files) and the history of
