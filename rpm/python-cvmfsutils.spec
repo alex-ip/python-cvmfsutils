@@ -1,7 +1,7 @@
 %define name python-cvmfsutils
-%define version 0.3.1
-%define unmangled_version 0.3.1
-%define unmangled_version 0.3.1
+%define version 0.3.2
+%define unmangled_version 0.3.2
+%define unmangled_version 0.3.2
 %define release 1
 
 Summary: Inspect CernVM-FS repositories
@@ -15,8 +15,9 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Prefix: %{_prefix}
 BuildArch: noarch
 Vendor: Rene Meusel <rene.meusel@cern.ch>
-Requires: python-setuptools python-requests >= 1.1.0 python-dateutil >= 1.4.1
+Requires: python-requests >= 1.1.0 python-dateutil >= 1.4.1
 Url: http://cernvm.cern.ch
+BuildRequires: python-setuptools
 
 %description
 **Please Note**: This repository is unmaintained and unsupported for the time being.

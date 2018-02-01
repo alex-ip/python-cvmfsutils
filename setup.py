@@ -9,7 +9,7 @@ readme_path = path.join(path.dirname(__file__), 'README')
 
 setup(
   name='python-cvmfsutils',
-  version='0.3.1',
+  version='0.3.2',
   url='http://cernvm.cern.ch',
   author='Rene Meusel',
   author_email='rene.meusel@cern.ch',
