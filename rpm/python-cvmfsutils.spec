@@ -15,7 +15,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Prefix: %{_prefix}
 BuildArch: noarch
 Vendor: Rene Meusel <rene.meusel@cern.ch>
-Requires: python-requests >= 1.1.0 python-dateutil >= 1.4.1
+Requires: python-setuptools python-requests >= 1.1.0 python-dateutil >= 1.4.1
 Url: http://cernvm.cern.ch
 
 %description
