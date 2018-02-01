@@ -9,13 +9,14 @@ readme_path = path.join(path.dirname(__file__), 'README')
 
 setup(
   name='python-cvmfsutils',
-  version='0.3.2',
+  version='0.3.3',
   url='http://cernvm.cern.ch',
   author='Rene Meusel',
   author_email='rene.meusel@cern.ch',
   license='(c) 2015 CERN - BSD License',
   description='Inspect CernVM-FS repositories',
-  long_description=open(readme_path).read(),
+  # read the first paragraph
+  long_description=open(readme_path).read().split("\n\n")[0],
   classifiers= [
     'Development Status :: 4 - Beta',
     'Environment :: Console',
