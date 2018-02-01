@@ -10,7 +10,7 @@ Example Usage:
 
    import cvmfs
 
-   repo = cvmfs.RemoteRepository('http://cvmfs-stratum-one.cern.ch/opt/boss')
+   repo = cvmfs.RemoteRepository('http://cvmfs.fnal.gov/cvmfs/grid.cern.ch')
    print 'Last Revision:' , repo.manifest.revision , repo.manifest.last_modified
    root_catalog = repo.retrieve_root_catalog()
    print 'Catalog Schema:' , root_catalog.schema
@@ -21,7 +21,11 @@ Example Usage:
        print full_path
 
 
-Packages are available in the cvmfs-contrib yum repository for EL6 & 7:
+Example programs "big_catalogs" and "catdirusage" are supplied in the
+"utils" directory, which are also useful for figuring out where to
+split up the catalogs in a cvmfs repository.
+
+Rpms are available in the cvmfs-contrib yum repository for EL6 & 7:
 
 # yum install -y https://ecsft.cern.ch/dist/cvmfs/cvmfs-contrib-release/cvmfs-contrib-release-latest.noarch.rpm
 # yum install -y python-cvmfsutils

@@ -1,7 +1,7 @@
 %define name python-cvmfsutils
-%define version 0.3.3
-%define unmangled_version 0.3.3
-%define unmangled_version 0.3.3
+%define version 0.4.0
+%define unmangled_version 0.4.0
+%define unmangled_version 0.4.0
 %define release 1
 
 Summary: Inspect CernVM-FS repositories
@@ -20,10 +20,10 @@ Url: http://cernvm.cern.ch
 BuildRequires: python-setuptools
 
 %description
-The CernVM-FS python package allows for the inspection of CernVM-FS repositories
-using python. In particular to browse their file catalog hierarchy, inspect
-CernVM-FS repository manifests (a.k.a. .cvmfspublished files) and the history of
-named snapshots inside any CernVM-FS 2.1 repository.
+The CernVM-FS python package allows for the inspection of CernVM-FS
+repositories using python. In particular to browse their file catalog
+hierarchy, inspect CernVM-FS repository manifests (a.k.a. .cvmfspublished
+files) and the history of named snapshots inside any CernVM-FS repository.
 
 %prep
 %setup -n %{name}-%{unmangled_version} -n %{name}-%{unmangled_version}
