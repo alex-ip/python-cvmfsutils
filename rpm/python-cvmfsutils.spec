@@ -1,4 +1,4 @@
-%define name cvmfsutils
+%define name python-cvmfsutils
 %define version 0.3.0
 %define unmangled_version 0.3.0
 %define unmangled_version 0.3.0

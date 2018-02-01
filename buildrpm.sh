@@ -5,4 +5,4 @@ set -ex
 python setup.py bdist_rpm --requires "$RPMREQUIRES"
 # also update spec file for OBS; check it into git manually
 python setup.py bdist_rpm --requires "$RPMREQUIRES" --spec-only
-mv dist/cvmfsutils.spec rpm
+mv dist/python-cvmfsutils.spec rpm
