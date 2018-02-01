@@ -35,7 +35,7 @@ setup(
   zip_safe=False,
   test_suite='cvmfs.test',
   tests_require='xmlrunner',
-  install_requires=[ # don't forget to adapt the matching RPM dependencies!
+  install_requires=[ # for pip; don't forget the similar RPM dependencies!
     'python-dateutil >= 1.4.1',
     'requests >= 1.1.0',
     'M2Crypto >= 0.20.0'
