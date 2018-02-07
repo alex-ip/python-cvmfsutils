@@ -8,14 +8,15 @@ from os         import path
 readme_path = path.join(path.dirname(__file__), 'README')
 
 setup(
-  name='cvmfsutils',
-  version='0.3.0',
+  name='python-cvmfsutils',
+  version='0.3.3',
   url='http://cernvm.cern.ch',
   author='Rene Meusel',
   author_email='rene.meusel@cern.ch',
   license='(c) 2015 CERN - BSD License',
   description='Inspect CernVM-FS repositories',
-  long_description=open(readme_path).read(),
+  # read the first paragraph
+  long_description=open(readme_path).read().split("\n\n")[0],
   classifiers= [
     'Development Status :: 4 - Beta',
     'Environment :: Console',
@@ -35,7 +36,7 @@ setup(
   zip_safe=False,
   test_suite='cvmfs.test',
   tests_require='xmlrunner',
-  install_requires=[ # don't forget to adapt the matching RPM dependencies!
+  install_requires=[ # for pip; don't forget the similar RPM dependencies!
     'python-dateutil >= 1.4.1',
     'requests >= 1.1.0',
     'M2Crypto >= 0.20.0'

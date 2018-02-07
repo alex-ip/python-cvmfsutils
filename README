@@ -1,9 +1,10 @@
-**Please Note**: This repository is unmaintained and unsupported for the time being.
+The CernVM-FS python package allows for the inspection of CernVM-FS
+repositories using python. In particular to browse their file catalog
+hierarchy, inspect CernVM-FS repository manifests (a.k.a. .cvmfspublished
+files) and the history of named snapshots inside any CernVM-FS repository.
 
-The CernVM-FS python package allows for the inspection of CernVM-FS repositories
-using python. In particular to browse their file catalog hierarchy, inspect
-CernVM-FS repository manifests (a.k.a. .cvmfspublished files) and the history of
-named snapshots inside any CernVM-FS 2.1 repository.
+The support for this package is low: best effort, and with very
+limited testing.
 
 Example Usage:
 
@@ -18,3 +19,10 @@ Example Usage:
    print 'Listing repository'
    for full_path, dirent in repo:
        print full_path
+
+
+Packages are available in the cvmfs-contrib yum repository for EL6 & 7:
+
+# yum install -y https://ecsft.cern.ch/dist/cvmfs/cvmfs-contrib-release/cvmfs-contrib-release-latest.noarch.rpm
+# yum install -y python-cvmfsutils
+
