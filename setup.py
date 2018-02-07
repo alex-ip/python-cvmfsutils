@@ -9,7 +9,7 @@ readme_path = path.join(path.dirname(__file__), 'README')
 
 setup(
   name='python-cvmfsutils',
-  version='0.3.3',
+  version='0.4.0',
   url='http://cernvm.cern.ch',
   author='Rene Meusel',
   author_email='rene.meusel@cern.ch',
@@ -33,6 +33,7 @@ setup(
     'Topic :: System :: Systems Administration'
   ],
   packages=find_packages(),
+  scripts=['utils/big_catalogs', 'utils/catdirusage'],
   zip_safe=False,
   test_suite='cvmfs.test',
   tests_require='xmlrunner',
