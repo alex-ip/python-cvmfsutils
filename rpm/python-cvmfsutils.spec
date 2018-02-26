@@ -1,7 +1,7 @@
 %define name python-cvmfsutils
-%define version 0.4.0
-%define unmangled_version 0.4.0
-%define unmangled_version 0.4.0
+%define version 0.4.1
+%define unmangled_version 0.4.1
+%define unmangled_version 0.4.1
 %define release 1
 
 Summary: Inspect CernVM-FS repositories
