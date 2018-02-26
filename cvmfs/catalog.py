@@ -304,8 +304,11 @@ class Catalog(DatabaseObject):
                                        FROM chunks                 \
                                        WHERE lower(hex(hash)) = '" +
                                                             content_hash + "';")
-        return list({ self.backtrace_path_split_md5(md5pair[0], md5pair[1]) \
-                    for md5pair in bulk_chunks + partial_chunks })
+        pairs = []
+        for md5pair in bulk_chunks + partial_chunks:
+            pairs.append(self.backtrace_path_split_md5(md5pair[0], md5pair[1]))
+
+        return pairs
 
 
     def is_root(self):
