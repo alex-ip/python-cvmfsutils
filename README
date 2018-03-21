@@ -27,7 +27,7 @@ split up the catalogs in a cvmfs repository.
 
 Rpms are available in the cvmfs-contrib yum repositories for EL6 & 7.
 See https://cvmfs-contrib.github.io for instructions to enable one
-of those repositories.
+of those repositories.  Then to install simply do:
 
 # yum install -y python-cvmfsutils
 
