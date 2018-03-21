@@ -25,8 +25,9 @@ Example programs "big_catalogs" and "catdirusage" are supplied in the
 "utils" directory, which are also useful for figuring out where to
 split up the catalogs in a cvmfs repository.
 
-Rpms are available in the cvmfs-contrib yum repository for EL6 & 7:
+Rpms are available in the cvmfs-contrib yum repositories for EL6 & 7.
+See https://cvmfs-contrib.github.io for instructions to enable one
+of those repositories.  Then to install simply do:
 
-# yum install -y https://ecsft.cern.ch/dist/cvmfs/cvmfs-contrib-release/cvmfs-contrib-release-latest.noarch.rpm
 # yum install -y python-cvmfsutils
 
