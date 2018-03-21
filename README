@@ -26,7 +26,8 @@ Example programs "big_catalogs" and "catdirusage" are supplied in the
 split up the catalogs in a cvmfs repository.
 
 Rpms are available in the cvmfs-contrib yum repositories for EL6 & 7.
-Instructions for those are available at https://cvmfs-contrib.github.io.
+See https://cvmfs-contrib.github.io for instructions to enable one
+of those repositories.
 
 # yum install -y python-cvmfsutils
 
