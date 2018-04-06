@@ -1,14 +1,11 @@
-%define name python-cvmfsutils
-%define version 0.4.1
-%define unmangled_version 0.4.1
-%define unmangled_version 0.4.1
-%define release 1
+# OBS expects the name %release_prefix; do not change the name
+%define release_prefix 2
 
 Summary: Inspect CernVM-FS repositories
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Source0: %{name}-%{unmangled_version}.tar.gz
+Name: python-cvmfsutils
+Version: 0.4.1
+Release: %{release_prefix}%{?dist}
+Source0: %{name}-%{version}.tar.gz
 License: (c) 2015 CERN - BSD License
 Group: Development/Libraries
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -26,7 +23,7 @@ hierarchy, inspect CernVM-FS repository manifests (a.k.a. .cvmfspublished
 files) and the history of named snapshots inside any CernVM-FS repository.
 
 %prep
-%setup -n %{name}-%{unmangled_version} -n %{name}-%{unmangled_version}
+%setup -n %{name}-%{version} -n %{name}-%{version}
 
 %build
 python setup.py build
@@ -39,3 +36,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f INSTALLED_FILES
 %defattr(-,root,root)
+
+%changelog
+* Fri Apr 06 2018 Dave Dykstra <dwd@fnal.gov>> - 0.4.1-2
+- Add a changelog
+- Make builds more seamless on OBS
