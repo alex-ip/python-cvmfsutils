@@ -73,6 +73,9 @@ class Manifest(RootFile):
             self.repoinfo            = data
         elif key_char == "V":
             self.cvmfs_version       = data
+        elif key_char == "Y":
+            # this is the reflog hash, don't care about it
+            pass
         else:
             raise UnknownManifestField(key_char)
 
