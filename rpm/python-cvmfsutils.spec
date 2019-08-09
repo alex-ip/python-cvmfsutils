@@ -1,9 +1,9 @@
 # OBS expects the name %release_prefix; do not change the name
-%define release_prefix 2
+%define release_prefix 1
 
 Summary: Inspect CernVM-FS repositories
 Name: python-cvmfsutils
-Version: 0.4.1
+Version: 0.4.2
 Release: %{release_prefix}%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: (c) 2015 CERN - BSD License
@@ -38,6 +38,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
+* Fri Aug 0l 2019 Dave Dykstra <dwd@fnal.gov>> - 0.4.2-1
+- Prevent crashing on new "Y" .cvmfspublished key
+
 * Fri Apr 06 2018 Dave Dykstra <dwd@fnal.gov>> - 0.4.1-2
 - Add a changelog
 - Make builds more seamless on OBS
