@@ -10,9 +10,9 @@ Example Usage:
 
    import cvmfs
 
-   repo = cvmfs.RemoteRepository('http://cvmfs.fnal.gov/cvmfs/grid.cern.ch')
+   repo = cvmfs.open_repository('http://cvmfs.fnal.gov/cvmfs/grid.cern.ch')
    print 'Last Revision:' , repo.manifest.revision , repo.manifest.last_modified
-   root_catalog = repo.retrieve_root_catalog()
+   root_catalog = repo.retrieve_catalog(repo.manifest.root_catalog)
    print 'Catalog Schema:' , root_catalog.schema
    for nested_catalog_ref in root_catalog.list_nested():
        print 'Nested Catalog at:' , nested_catalog_ref.root_path
