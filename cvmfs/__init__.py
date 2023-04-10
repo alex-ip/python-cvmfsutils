@@ -55,14 +55,14 @@ def _get_server_version():
     try:
         output = check_output(['cvmfs_server'])
         return __extract_version_string(output)
-    except OSError, e:
+    except OSError as e:
         raise ServerNotInstalled()
 
 
 def _get_client_version():
     try:
         output = check_output(['cvmfs2', '--version'])
-    except OSError, e:
+    except OSError as e:
         raise ClientNotInstalled()
     return __extract_version_string(output)
 
@@ -80,5 +80,5 @@ except (ServerNotInstalled, VersionNotDetected) as e:
 
 try:
     client_version = _get_client_version()
-except ClientNotInstalled, e:
+except ClientNotInstalled as e:
     has_client = False

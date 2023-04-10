@@ -42,5 +42,5 @@ class FileSandbox:
         full_file_path = os.path.join(self.temporary_dir, file_path)
         if os.path.isfile(full_file_path):
             os.unlink(full_file_path)
-        with open(full_file_path, "w+") as f:
+        with open(full_file_path, "wb+") as f:
             f.write(string_buffer)

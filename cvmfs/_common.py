@@ -76,21 +76,21 @@ def _binary_buffer_to_hex_string(binbuf):
 def _split_md5(md5digest):
     hi = lo = 0
     for i in range(0, 8):
-        lo |= (ord(md5digest[i]) << (i * 8))
+        lo |= (md5digest[i] << (i * 8))
     for i in range(8,16):
-        hi |= (ord(md5digest[i]) << ((i - 8) * 8))
+        hi |= (md5digest[i] << ((i - 8) * 8))
     return ctypes.c_int64(lo).value, ctypes.c_int64(hi).value  # signed int!
 
 def _combine_md5(lo, hi):
-    md5digest = [ '\x00','\x00','\x00','\x00','\x00','\x00','\x00','\x00',
-                  '\x00','\x00','\x00','\x00','\x00','\x00','\x00','\x00' ]
+    md5digest = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
     for i in range(0, 8):
-        md5digest[i] = chr(lo & 0xFF)
+        md5digest[i] = (lo & 0xFF)
         lo >>= 8
     for i in range(8,16):
-        md5digest[i] = chr(hi & 0xFF)
+        md5digest[i] = (hi & 0xFF)
         hi >>= 8
-    return ''.join(md5digest)
+    return bytes(md5digest)
 
 
 class TzInfos:

@@ -7,7 +7,7 @@ This file is part of the CernVM File System auxiliary tools.
 
 import base64
 import datetime
-import StringIO
+from io import StringIO
 import unittest
 import zlib
 
@@ -33,7 +33,7 @@ class TestWhitelist(unittest.TestCase):
             '-----END PUBLIC KEY-----'
             ''
         ])
-        self.public_key_file = self.sandbox.write_to_temporary(self.cern_public_key)
+        self.public_key_file = self.sandbox.write_to_temporary(self.cern_public_key.encode('utf8'))
 
         self.compressed_certificate = '\n'.join([
             'eJxllLmOq1gQQHO+YnLUMtDG4OAFdwODWc1iIDOYxew0q/n6cU8wyauodHSkUqmWr69PQCIrxj+I',
@@ -56,7 +56,7 @@ class TestWhitelist(unittest.TestCase):
         compressed_cert = base64.b64decode(self.compressed_certificate)
         self.certificate_file = self.sandbox.write_to_temporary(zlib.decompress(compressed_cert))
 
-        self.sane_whitelist = StringIO.StringIO('\n'.join([
+        self.sane_whitelist = StringIO('\n'.join([
             '20150603095527',
             'E20150704095527',
             'Natlas.cern.ch',
@@ -67,10 +67,10 @@ class TestWhitelist(unittest.TestCase):
             '65a35687479260c90d38e4e114dbc345fde90bbb',
             '-yw\xfc\xa1\xa9\xc4Z%\xfd\x1d\xdf\x17\xa7\xa8\x99sB\x8a\xd9\xe0\xb1?f\xba\x1a\xa61\xa2v_\t\x1bl\x1a\xd9\x7f\n\x01\x9f\xf5\xf8j;\xf6\xaa;\xc7n\xfc\xc8\xa9{\xb5\xe2E.<?G\xfc|[f\'Xd\x05=u]\xc1\t?M\xb4\xab\x164\xc8\x0b\xec-<\xa0\xf6;E\x08\xdb@\xd6\x88!|\xb0f\x9c\xe3\x1a.\x04l\x8b)o\x89i\xdb\\\xf9\xff\xec\xebM\xc3\x87\x98\x8f\xc9\xea\xf1L\xa4\x08\x1b\xe9\xda\xf6\xff\xd1\xd3GN\x82AD\xd9\xc3\xd1\xdf\x17\x06\xd4Ad\xafS"\xc0\x8b\xc3\xeb\xa6\xe9\xaa\xf6\x90\xc7\x11PV\xa5Ls\xb5\x9b\xd2;\xdci\xdb\xa9\x03\x02\xf1\x8c\xb8^l\xb5\xb9\x11\xe1\xa0aM\x17\xe8\x8e\x7f;u\xa5S\xdc\xb2V\xa1\xe0\x91\x14\x02\xee\xe0a\x99\xda\xbc\x9cK\x1d\xa5\xf7\x13$:W\x91\xe6\xe6\x1f\xc4\xd7\x04\xbc\xe0\x86\xcb\x97\x17\x16 \xc0>\x04\x13\xbfr\xc6\xdeYn\xe8t+\xb4#\x05\xa6\xda\xef\xfd\xf6\x9c\xbf'
         ]))
-        self.file_whitelist = self.sandbox.write_to_temporary(self.sane_whitelist.getvalue())
+        self.file_whitelist = self.sandbox.write_to_temporary(self.sane_whitelist.getvalue().encode('utf8'))
         self.assertNotEqual(None, self.file_whitelist)
 
-        self.insane_whitelist_signature_mismatch = StringIO.StringIO('\n'.join([
+        self.insane_whitelist_signature_mismatch = StringIO('\n'.join([
             '20150603095527',
             'E20150704095527',
             'Natlas.cern.ch',
@@ -80,7 +80,7 @@ class TestWhitelist(unittest.TestCase):
             '-yw\xfc\xa1\xa9\xc4Z%\xfd\x1d\xdf\x17\xa7\xa8\x99sB\x8a\xd9\xe0\xb1?f\xba\x1a\xa61\xa2v_\t\x1bl\x1a\xd9\x7f\n\x01\x9f\xf5\xf8j;\xf6\xaa;\xc7n\xfc\xc8\xa9{\xb5\xe2E.<?G\xfc|[f\'Xd\x05=u]\xc1\t?M\xb4\xab\x164\xc8\x0b\xec-<\xa0\xf6;E\x08\xdb@\xd6\x88!|\xb0f\x9c\xe3\x1a.\x04l\x8b)o\x89i\xdb\\\xf9\xff\xec\xebM\xc3\x87\x98\x8f\xc9\xea\xf1L\xa4\x08\x1b\xe9\xda\xf6\xff\xd1\xd3GN\x82AD\xd9\xc3\xd1\xdf\x17\x06\xd4Ad\xafS"\xc0\x8b\xc3\xeb\xa6\xe9\xaa\xf6\x90\xc7\x11PV\xa5Ls\xb5\x9b\xd2;\xdci\xdb\xa9\x03\x02\xf1\x8c\xb8^l\xb5\xb9\x11\xe1\xa0aM\x17\xe8\x8e\x7f;u\xa5S\xdc\xb2V\xa1\xe0\x91\x14\x02\xee\xe0a\x99\xda\xbc\x9cK\x1d\xa5\xf7\x13$:W\x91\xe6\xe6\x1f\xc4\xd7\x04\xbc\xe0\x86\xcb\x97\x17\x16 \xc0>\x04\x13\xbfr\xc6\xdeYn\xe8t+\xb4#\x05\xa6\xda\xef\xfd\xf6\x9c\xbf'
         ]))
 
-        self.insane_whitelist_broken_signature = StringIO.StringIO('\n'.join([
+        self.insane_whitelist_broken_signature = StringIO('\n'.join([
             '20150603095527',
             'E20150704095527',
             'Natlas.cern.ch',
@@ -93,7 +93,7 @@ class TestWhitelist(unittest.TestCase):
             #  ^-- that byte has been tampered with (was 'w')
         ]))
 
-        self.unknown_field_whitelist = StringIO.StringIO('\n'.join([
+        self.unknown_field_whitelist = StringIO('\n'.join([
             '20150603095527',
             'E20150704095527',
             'Natlas.cern.ch',
@@ -105,7 +105,7 @@ class TestWhitelist(unittest.TestCase):
             ''
         ]))
 
-        self.invalid_fingerprint_whitelist = StringIO.StringIO('\n'.join([
+        self.invalid_fingerprint_whitelist = StringIO('\n'.join([
             '20150603095527',
             'E20150704095527',
             'Natlas.cern.ch',
@@ -116,7 +116,7 @@ class TestWhitelist(unittest.TestCase):
             ''
         ]))
 
-        self.invalid_timestamp_whitelist = StringIO.StringIO('\n'.join([
+        self.invalid_timestamp_whitelist = StringIO('\n'.join([
             '20150603095527',
             'E2015070409527', # <--
             'Natlas.cern.ch',
@@ -124,7 +124,7 @@ class TestWhitelist(unittest.TestCase):
             ''
         ]))
 
-        self.missing_field_whitelist = StringIO.StringIO('\n'.join([
+        self.missing_field_whitelist = StringIO('\n'.join([
             '20150603095527',
             'E20150704095527',
             #'Natlas.cern.ch',
@@ -135,7 +135,7 @@ class TestWhitelist(unittest.TestCase):
             ''
         ]))
 
-        self.no_fingerprints_whitelist = StringIO.StringIO('\n'.join([
+        self.no_fingerprints_whitelist = StringIO('\n'.join([
             '20150603095527',
             'E20150704095527',
             'Natlas.cern.ch',
@@ -145,7 +145,7 @@ class TestWhitelist(unittest.TestCase):
             ''
         ]))
 
-        self.missing_signature = StringIO.StringIO('\n'.join([
+        self.missing_signature = StringIO('\n'.join([
             '20150603095527',
             'E20150704095527',
             'Natlas.cern.ch',
@@ -153,7 +153,7 @@ class TestWhitelist(unittest.TestCase):
             ''
         ]))
 
-        self.broken_signature = StringIO.StringIO('\n'.join([
+        self.broken_signature = StringIO('\n'.join([
             '20150603095527',
             'E20150704095527',
             'Natlas.cern.ch',
@@ -163,7 +163,7 @@ class TestWhitelist(unittest.TestCase):
             ''
         ]))
 
-        self.incomplete_signature = StringIO.StringIO('\n'.join([
+        self.incomplete_signature = StringIO('\n'.join([
             '20150603095527',
             'E20150704095527',
             'Natlas.cern.ch',
@@ -173,7 +173,7 @@ class TestWhitelist(unittest.TestCase):
         ]))
 
         yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
-        self.expired_whitelist = StringIO.StringIO('\n'.join([
+        self.expired_whitelist = StringIO('\n'.join([
             '20010603095527',
             'E' + yesterday.strftime("%Y%m%d%H%M%S"),
             'Natlas.cern.ch',
@@ -182,7 +182,7 @@ class TestWhitelist(unittest.TestCase):
         ]))
 
         tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
-        self.time_valid_whitelist = StringIO.StringIO('\n'.join([
+        self.time_valid_whitelist = StringIO('\n'.join([
             '20150603095527',
             'E' + tomorrow.strftime("%Y%m%d%H%M%S"),
             'Natlas.cern.ch',

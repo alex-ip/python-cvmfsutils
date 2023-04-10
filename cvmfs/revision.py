@@ -42,7 +42,7 @@ class RevisionIterator(object):
     def _get_next_dirent(self):
         try:
             return self._get_current_catalog().catalog_iterator.next()
-        except StopIteration, e:
+        except StopIteration as e:
             self._pop_catalog()
             if not self._has_more():
                 raise StopIteration()

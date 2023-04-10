@@ -28,12 +28,17 @@ class Certificate:
     def get_fingerprint(self, algorithm='sha1'):
         """ returns the fingerprint of the X509 certificate """
         fp = self.openssl_certificate.get_fingerprint(algorithm)
-        return ':'.join([ x + y for x, y in zip(fp[0::2], fp[1::2]) ])
+        return ':'.join([ x + y for x, y in zip(fp[1::2], fp[2::2]) ])
 
     def verify(self, signature, message):
         """ verify a given signature to an expected 'message' string """
+        print(signature, message)
         pubkey = self.openssl_certificate.get_pubkey()
+        print(f'pubkey.__dict__ = {pubkey.__dict__}')
         pubkey.reset_context(md='sha1')
         pubkey.verify_init()
-        pubkey.verify_update(message)
-        return pubkey.verify_final(signature)
+        result = pubkey.verify_update(message)
+        print(f'verify_update result = {result}')
+        result = pubkey.verify_final(signature)
+        print(f'verify_final result = {result}')
+        return (result == 1)

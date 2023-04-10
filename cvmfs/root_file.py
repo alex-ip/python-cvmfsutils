@@ -45,6 +45,10 @@ class RootFile:
         """ Initializes a root file object from a file pointer """
         self.has_signature = False
         for line in file_object.readlines():
+            try:
+                line = line.decode('utf8')
+            except AttributeError:
+                pass
             if len(line) == 0:
                 continue
             if line[0:2] == "--":
@@ -70,11 +74,15 @@ class RootFile:
         hash_sum = hashlib.sha1()
         while True:
             line = file_object.readline()
+            try:
+                line = line.decode('utf8')
+            except AttributeError:
+                pass
             if line[0:2] == "--":
                 break
             if pos == file_object.tell():
                 raise IncompleteRootFileSignature("Signature not found")
-            hash_sum.update(line)
+            hash_sum.update(line.encode('utf8'))
             pos = file_object.tell()
         return hash_sum.hexdigest()
 
@@ -82,13 +90,22 @@ class RootFile:
     def _read_signature(self, file_object):
         """ Reads the signature's checksum and the binary signature string """
         file_object.seek(0)
-        message_digest = self._hash_over_content(file_object)
+        message_digest = self._hash_over_content(file_object).encode('utf8')
 
         self.signature_checksum = file_object.readline().rstrip()
+        try:
+            self.signature_checksum = self.signature_checksum.encode('utf8')
+        except AttributeError:
+            pass
+        print(f'self.signature_checksum = {self.signature_checksum}')
         if len(self.signature_checksum) != 40:
             raise IncompleteRootFileSignature("Signature checksum malformed")
         if message_digest != self.signature_checksum:
             raise InvalidRootFileSignature("Signature checksum doesn't match")
         self.signature = file_object.read()
+        try:
+            self.signature = self.signature.encode('utf8')
+        except AttributeError:
+            pass
         if len(self.signature) == 0:
             raise IncompleteRootFileSignature("Binary signature not found")

@@ -8,15 +8,18 @@ This file is part of the CernVM File System auxiliary tools.
 import abc
 import os
 import tempfile
+from _io import TextIOWrapper as file
 
 import cvmfs
 import _common
 from _exceptions import *
 
+
 class CacheNotFoundException(Exception):
     def __init__(self, path):
         super(Exception, self).__init__("Couldn't initialize the cache in \' "
                                         + str(path) + "\'. The directory does not exist")
+
 
 class Cache(object):
     """ Abstract base class for a caching strategy """
@@ -25,6 +28,7 @@ class Cache(object):
         :file_name  name of the object to be retrieved
         :return     a file object of the cached object or None if not found
     """
+
     @abc.abstractmethod
     def get(self, file_name):
         pass
@@ -33,6 +37,7 @@ class Cache(object):
         :file_name  name of the object to be stored in the cache
         :return     a writable file object to a temporary storage location
     """
+
     @abc.abstractmethod
     def transaction(self, file_name):
         pass
@@ -41,6 +46,7 @@ class Cache(object):
         :resource   a file object obtained by transaction() and filled with data
         :return     a file object to the committed object
     """
+
     @abc.abstractmethod
     def commit(self, resource):
         pass
@@ -105,7 +111,7 @@ class DiskCache(Cache):
     def _create_dir(self, path):
         cache_full_path = os.path.join(self._cache_dir, path)
         if not os.path.exists(cache_full_path):
-            os.mkdir(cache_full_path, 0755)
+            os.mkdir(cache_full_path, 0o755)
 
     def _create_cache_structure(self):
         self._create_dir('data')
@@ -135,6 +141,6 @@ class DiskCache(Cache):
                 # if the file has been removed by now the open method
                 # throws an exception
                 return open(full_path, 'rb')
-            except IOError, e:
+            except IOError as e:
                 raise FileNotFoundInRepository(full_path)
         return None

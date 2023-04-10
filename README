@@ -11,14 +11,14 @@ Example Usage:
    import cvmfs
 
    repo = cvmfs.open_repository('http://cvmfs.fnal.gov/cvmfs/grid.cern.ch')
-   print 'Last Revision:' , repo.manifest.revision , repo.manifest.last_modified
+   print('Last Revision:' , repo.manifest.revision , repo.manifest.last_modified)
    root_catalog = repo.retrieve_catalog(repo.manifest.root_catalog)
-   print 'Catalog Schema:' , root_catalog.schema
+   print('Catalog Schema:' , root_catalog.schema)
    for nested_catalog_ref in root_catalog.list_nested():
-       print 'Nested Catalog at:' , nested_catalog_ref.root_path
-   print 'Listing repository'
+       print('Nested Catalog at:' , nested_catalog_ref.root_path)
+   print('Listing repository')
    for full_path, dirent in repo:
-       print full_path
+       print(full_path)
 
 
 Example programs "big_catalogs" and "catdirusage" are supplied in the

@@ -61,6 +61,7 @@ class Whitelist(RootFile):
         #
         # Note: the whitelist contains a list of certificate fingerprints that
         #       are not prepended by a key either. We use a regex to detect them
+        print(f'whitelist line = {line}')
         key_char = line[0]
         data     = line[1:-1]
         match    = self._fingerprint_re.search(line[:-1]) # full line!
@@ -93,7 +94,7 @@ class Whitelist(RootFile):
         try:
             sig_sum = pubkey.public_decrypt(self.signature, RSA.pkcs1_padding)
             return sig_sum == self.signature_checksum
-        except RSA.RSAError, e:
+        except RSA.RSAError as e:
             return False
 
 

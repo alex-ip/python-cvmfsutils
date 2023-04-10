@@ -18,7 +18,7 @@ class Manifest(RootFile):
     @staticmethod
     def open(manifest_path):
         """ Initializes a Manifest from a local file path """
-        with open(manifest_path) as manifest_file:
+        with open(manifest_path, 'r') as manifest_file:
             return Manifest(manifest_file)
 
     def __init__(self, manifest_file):
@@ -43,8 +43,12 @@ class Manifest(RootFile):
 
     def _read_line(self, line):
         """ Parse lines that appear in .cvmfspublished """
+
         key_char = line[0]
         data     = line[1:-1]
+        print(f'line = {line}')
+        print(f'key_char = {key_char}')
+        print(f'data = {data}')
         if   key_char == "C":
             self.root_catalog        = data
         elif key_char == "R":

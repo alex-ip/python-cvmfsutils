@@ -28,7 +28,7 @@ class TestRepositoryWrapper(unittest.TestCase):
             'HQIDAQAB',
             '-----END PUBLIC KEY-----'
             ''
-        ])
+        ]).encode('utf8')
         pubkey = self.sandbox.write_to_temporary(self.cern_public_key)
         self.public_key_file = pubkey
 

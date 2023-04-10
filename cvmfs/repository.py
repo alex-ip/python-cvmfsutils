@@ -63,7 +63,7 @@ class Repository(object):
             with self._fetcher.retrieve_raw_file(_common._MANIFEST_NAME) as manifest_file:
                 self.manifest = Manifest(manifest_file)
             self.fqrn = self.manifest.repository_name
-        except FileNotFoundInRepository, e:
+        except FileNotFoundInRepository as e:
             raise RepositoryNotFound(self._fetcher.source)
 
 
@@ -81,7 +81,7 @@ class Repository(object):
                 self.last_replication = self.__read_timestamp(timestamp)
             if not self.has_repository_type():
                 self.type = 'stratum1'
-        except FileNotFoundInRepository, e:
+        except FileNotFoundInRepository as e:
             self.last_replication = datetime.fromtimestamp(0, tz=tzutc())
 
     def _try_to_get_replication_state(self):
@@ -91,7 +91,7 @@ class Repository(object):
                 timestamp = rf.readline()
                 self.replicating = True
                 self.replicating_since = self.__read_timestamp(timestamp)
-        except FileNotFoundInRepository, e:
+        except FileNotFoundInRepository as e:
             pass
 
     def verify(self, public_key_path):
@@ -151,6 +151,7 @@ class Repository(object):
     def retrieve_whitelist(self):
         """ retrieve and parse the .cvmfswhitelist file from the repository """
         whitelist = self._fetcher.retrieve_raw_file(_common._WHITELIST_NAME)
+        print(f'whitelist = {whitelist}')
         return Whitelist(whitelist)
 
     def retrieve_certificate(self):
@@ -172,8 +173,8 @@ class Repository(object):
     def close_catalog(self, catalog):
         try:
             del self._opened_catalogs[catalog.hash]
-        except KeyError, e:
-            print "not found:" , catalog.hash
+        except KeyError as e:
+            print("not found:" , catalog.hash)
 
     def _retrieve_and_open_catalog(self, catalog_hash):
         catalog_file = self.retrieve_object(catalog_hash, 'C')
