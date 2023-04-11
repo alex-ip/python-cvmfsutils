@@ -210,7 +210,7 @@ class Catalog(DatabaseObject):
         """
         return len(needle_path) == len(nested_path) or \
             (len(needle_path) > len(nested_path) and
-                needle_path[len(nested_path)] == '/')
+                needle_path[len(nested_path)] == 47 ) #  47 == b'/'
 
     def find_nested_for_path(self, needle_path):
         """ Find the best matching nested CatalogReference for a given path """
@@ -231,8 +231,8 @@ class Catalog(DatabaseObject):
     def list_directory(self, path):
         """ Create a directory listing of the given directory path """
         real_path = self._canonicalize_path(path)
-        if real_path == '/':
-            real_path = ''
+        if real_path == b'/':
+            real_path = b''
         parent_1, parent_2 = _split_md5(hashlib.md5(real_path).digest())
         return self.list_directory_split_md5(parent_1, parent_2)
 

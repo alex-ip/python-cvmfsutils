@@ -116,7 +116,7 @@ class TestRepositoryWrapper(unittest.TestCase):
         rev = repo.get_current_revision()
         dirents = rev.list_directory('/')
         self.assertIsNotNone(dirents)
-        self.assertEqual(3, len(list(dirents)))
+        self.assertEqual(3, len(dirents))
         dirents = rev.list_directory('/bar/3')
         self.assertIsNotNone(dirents)
         self.assertEqual(4, len(dirents))

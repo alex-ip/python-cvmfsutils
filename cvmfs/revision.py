@@ -198,4 +198,9 @@ class Revision:
         dirent = self.lookup(path)
         if dirent and dirent.is_directory():
             best_fit = self.retrieve_catalog_for_path(path)
-            return best_fit.list_directory(path)
+            result = best_fit.list_directory(path)
+
+            if result is not None:
+                result = list(result)
+
+            return result
