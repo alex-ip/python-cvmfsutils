@@ -8,7 +8,7 @@ This file is part of the CernVM File System auxiliary tools.
 import unittest
 
 import cvmfs
-from file_sandbox    import FileSandbox
+from file_sandbox import FileSandbox
 from mock_repository import MockRepository
 
 
@@ -35,19 +35,16 @@ class TestRepositoryWrapper(unittest.TestCase):
     def tearDown(self):
         del self.mock_repo
 
-
     def test_open_repository_http(self):
         self.mock_repo.serve_via_http()
         repo = cvmfs.open_repository(self.mock_repo.url)
         self.assertTrue(isinstance(repo, cvmfs.Repository))
         self.assertEqual(self.mock_repo.repo_name, repo.manifest.repository_name)
 
-
     def test_open_repository_local(self):
         repo = cvmfs.open_repository(self.mock_repo.dir)
         self.assertTrue(isinstance(repo, cvmfs.Repository))
         self.assertEqual(self.mock_repo.repo_name, repo.manifest.repository_name)
-
 
     def test_open_repository_verification(self):
         self.mock_repo.make_valid_whitelist()
@@ -74,7 +71,6 @@ class TestRepositoryWrapper(unittest.TestCase):
         self.assertTrue(repo4.verify(self.mock_repo.public_key))
         self.assertEqual(self.mock_repo.repo_name, repo4.manifest.repository_name)
 
-
     def test_wrong_public_key(self):
         self.mock_repo.make_valid_whitelist()
         self.mock_repo.serve_via_http()
@@ -85,17 +81,13 @@ class TestRepositoryWrapper(unittest.TestCase):
                           cvmfs.open_repository,
                           self.mock_repo.dir, public_key=self.public_key_file)
 
-
     def test_expired_whitelist(self):
         self.mock_repo.make_expired_whitelist()
         self.mock_repo.serve_via_http()
-        self.assertRaises(cvmfs.RepositoryVerificationFailed,
-                          cvmfs.open_repository,
-                          self.mock_repo.url, public_key=self.mock_repo.public_key)
-        self.assertRaises(cvmfs.RepositoryVerificationFailed,
-                          cvmfs.open_repository,
-                          self.mock_repo.dir, public_key=self.mock_repo.public_key)
-
+        with self.assertRaises(cvmfs.RepositoryVerificationFailed):
+            cvmfs.open_repository(self.mock_repo.url, public_key=self.mock_repo.public_key)
+        with self.assertRaises(cvmfs.RepositoryVerificationFailed):
+            cvmfs.open_repository(self.mock_repo.dir, public_key=self.mock_repo.public_key)
 
     def test_lookup(self):
         self.mock_repo.make_valid_whitelist()
@@ -115,7 +107,6 @@ class TestRepositoryWrapper(unittest.TestCase):
         dirent2 = rev.lookup('/bar/4/../4/foo/')
         self.assertIsNotNone(dirent2)
         self.assertEquals(dirent1.name, dirent2.name)
-
 
     def test_list(self):
         self.mock_repo.make_valid_whitelist()

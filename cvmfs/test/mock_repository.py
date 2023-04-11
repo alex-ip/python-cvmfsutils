@@ -73,7 +73,6 @@ class MockRepository:
         with open(new_whitelist, 'wb+') as new_wl:  # TODO: more elegant is Py 2.7
             with open(old_whitelist, 'rb') as old_wl:
                 pos = old_wl.tell()
-                print(f'pos = {pos}')
                 while True:
                     line = old_wl.readline()
                     if len(line) >= 3 and line[0:3] == b'E20':  # fails in 85 years
