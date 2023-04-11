@@ -279,14 +279,8 @@ class TestManifest(unittest.TestCase):
 
 
     def test_verify_signature(self):
-        print(f'self.sane_manifest = {self.sane_manifest}')
         manifest = cvmfs.Manifest(self.sane_manifest)
-        print(f'manifest = {manifest}')
-        print(f'self.certificate_file = {self.certificate_file}')
         cert = cvmfs.Certificate(open(self.certificate_file))
-        print(f'cert = {cert}')
-        print(f'manifest.signature = {manifest.signature}')
-        print(f'manifest.signature_checksum = {manifest.signature_checksum}')
         is_valid = manifest.verify_signature(cert)
         self.assertTrue(is_valid)
 

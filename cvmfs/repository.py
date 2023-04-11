@@ -151,7 +151,6 @@ class Repository(object):
     def retrieve_whitelist(self):
         """ retrieve and parse the .cvmfswhitelist file from the repository """
         whitelist = self._fetcher.retrieve_raw_file(_common._WHITELIST_NAME)
-        print(f'whitelist = {whitelist}')
         return Whitelist(whitelist)
 
     def retrieve_certificate(self):

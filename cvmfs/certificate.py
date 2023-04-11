@@ -32,13 +32,9 @@ class Certificate:
 
     def verify(self, signature, message):
         """ verify a given signature to an expected 'message' string """
-        print(signature, message)
         pubkey = self.openssl_certificate.get_pubkey()
-        print(f'pubkey.__dict__ = {pubkey.__dict__}')
         pubkey.reset_context(md='sha1')
         pubkey.verify_init()
-        result = pubkey.verify_update(message)
-        print(f'verify_update result = {result}')
+        pubkey.verify_update(message)
         result = pubkey.verify_final(signature)
-        print(f'verify_final result = {result}')
-        return (result == 1)
+        return result == 1

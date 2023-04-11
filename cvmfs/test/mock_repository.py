@@ -76,7 +76,6 @@ class MockRepository:
                 print(f'pos = {pos}')
                 while True:
                     line = old_wl.readline()
-                    print(f'line = {line}')
                     if len(line) >= 3 and line[0:3] == b'E20':  # fails in 85 years
                         line = ('E' + expiry_date.strftime("%Y%m%d%H%M%S") + '\n').encode('utf8')
                     if line[0:2] == b"--":

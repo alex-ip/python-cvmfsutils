@@ -97,7 +97,6 @@ class RootFile:
             self.signature_checksum = self.signature_checksum.encode('utf8')
         except AttributeError:
             pass
-        print(f'self.signature_checksum = {self.signature_checksum}')
         if len(self.signature_checksum) != 40:
             raise IncompleteRootFileSignature("Signature checksum malformed")
         if message_digest != self.signature_checksum:

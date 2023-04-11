@@ -81,7 +81,6 @@ class LocalFetcher(Fetcher):
     def _retrieve_file(self, file_name, cached_file):
         full_path = self._make_file_uri(file_name)
         if os.path.exists(full_path):
-            print(f'full_path = {full_path}')
             compressed_file = open(full_path, 'rb')
             decompressed_content = zlib.decompress(compressed_file.read())
             compressed_file.close()

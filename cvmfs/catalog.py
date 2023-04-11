@@ -251,7 +251,6 @@ class Catalog(DatabaseObject):
     def find_directory_entry(self, path):
         """ Finds the DirectoryEntry for a given path """
         real_path = self._canonicalize_path(path)
-        print(f'real_path = {real_path}')
         md5path = hashlib.md5(real_path)
         return self.find_directory_entry_md5(md5path)
 
