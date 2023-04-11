@@ -31,7 +31,7 @@ class CatalogIterator:
         return self
 
 
-    def next(self):
+    def __next__(self):
         if not self._has_more():
             raise StopIteration()
         return self._recursion_step()

@@ -32,7 +32,7 @@ class RevisionIterator(object):
     def __iter__(self):
         return self
 
-    def next(self):
+    def __next__(self):
         full_path, dirent = self._get_next_dirent()
         if dirent.is_nested_catalog_mountpoint():
             self._fetch_and_push_catalog(full_path)
