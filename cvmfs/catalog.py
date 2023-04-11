@@ -64,7 +64,7 @@ class CatalogReference:
     """ Wraps a catalog reference to nested catalogs as found in Catalogs """
 
     def __init__(self, root_path, clg_hash, clg_size = 0):
-        self.root_path = root_path
+        self.root_path = root_path.encode('utf8')
         self.hash      = clg_hash
         self.size      = clg_size
 
@@ -251,6 +251,7 @@ class Catalog(DatabaseObject):
     def find_directory_entry(self, path):
         """ Finds the DirectoryEntry for a given path """
         real_path = self._canonicalize_path(path)
+        print(f'real_path = {real_path}')
         md5path = hashlib.md5(real_path)
         return self.find_directory_entry_md5(md5path)
 
@@ -396,8 +397,8 @@ class Catalog(DatabaseObject):
     @staticmethod
     def _canonicalize_path(path):
         if not path:
-            return ""
-        return os.path.abspath(path)
+            return "".encode('utf8')
+        return os.path.abspath(path).encode('utf8')
 
 
     def _check_validity(self):

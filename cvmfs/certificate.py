@@ -28,7 +28,7 @@ class Certificate:
     def get_fingerprint(self, algorithm='sha1'):
         """ returns the fingerprint of the X509 certificate """
         fp = self.openssl_certificate.get_fingerprint(algorithm)
-        return ':'.join([ x + y for x, y in zip(fp[1::2], fp[2::2]) ])
+        return ':'.join([ x + y for x, y in zip(fp[0::2], fp[1::2]) ])
 
     def verify(self, signature, message):
         """ verify a given signature to an expected 'message' string """

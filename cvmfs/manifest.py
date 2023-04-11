@@ -46,9 +46,6 @@ class Manifest(RootFile):
 
         key_char = line[0]
         data     = line[1:-1]
-        print(f'line = {line}')
-        print(f'key_char = {key_char}')
-        print(f'data = {data}')
         if   key_char == "C":
             self.root_catalog        = data
         elif key_char == "R":
