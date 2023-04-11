@@ -97,7 +97,7 @@ class CatalogTreeIterator(object):
     def __iter__(self):
         return self
 
-    def next(self):
+    def __next__(self):
         if not self._has_more():
             raise StopIteration()
         catalog = self._pop_catalog()
